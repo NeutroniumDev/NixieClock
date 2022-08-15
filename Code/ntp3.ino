@@ -67,22 +67,24 @@ void printTime() {
   Serial.println(s);
   }
 
-void writeNixie(int tubeNumber, int digit, bool state) {
-  int boolIndex = (10 * (tubeNumber - 1) + digit);
+void writeNixie(int tubeNumber, int digit, bool state) { //writes a number to a selected nixie
+  int boolIndex = (10 * (tubeNumber - 1) + digit);       //note: writing to the L/R periods has not been implemented yet. 
   bool dispBits[boolIndex] = {state};
   }
 
-void clearNixies() {
+
+void clearNixies() { //turns all the nixies off
   for (int i = 0; i < 96; i++) {
         bool dispBits[i] = {LOW};
     }
   }
 
-void writeShiftR(int clkPin, int dataPin) {
+void writeShiftR(int clkPin, int dataPin) { //writes the data to shift registers
   for (int i = 95; i >= 0; i--) {
       digitalWrite(clkPin, HIGH);
       digitalWrite(dataPin, dispBits[i]);
       digitalWrite(clkPin, LOW);
     }
   }
+
 
